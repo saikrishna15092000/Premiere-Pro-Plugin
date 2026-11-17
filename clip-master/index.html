@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			/* Premiere panels do not scroll on their own: the page and the review list both need it */
+			html, body { height: 100%; margin: 0; }
+			body { color: #ddd; font-family: sans-serif; font-size: 12px; padding: 10px; box-sizing: border-box; overflow-y: auto; }
+			#cuts { max-height: 260px; overflow-y: auto; }
+			h3 { margin: 14px 0 6px; font-size: 12px; text-transform: uppercase; color: #999; }
+			.row { display: flex; align-items: center; margin: 4px 0; }
+			.row input[type="number"] { width: 56px; margin: 0 6px; }
+			button { margin: 8px 6px 0 0; }
+			#status { margin: 10px 0; min-height: 16px; }
+			#status.error { color: #ff7b7b; }
+			#cuts .cut { display: flex; align-items: flex-start; margin: 3px 0; }
+			#cuts .clip { margin-top: 8px; color: #999; }
+			textarea { width: 100%; height: 140px; font-family: monospace; font-size: 10px; }
+		</style>
+	</head>
+	<body>
+		<h3>Remove</h3>
+		<div class="row"><input type="checkbox" id="pauses" checked /> Pauses longer than <input type="number" id="minPause" min="0.3" max="10" step="0.1" value="0.6" /> s</div>
+		<div class="row">Keep <input type="number" id="pad" min="0" max="1" step="0.05" value="0.15" /> s of quiet around speech</div>
+		<div class="row"><input type="checkbox" id="fillers" checked /> Hesitations (um, stalls)</div>
+		<div class="row"><input type="checkbox" id="repeats" checked /> Repeated takes and restarts</div>
+
+		<button id="analyze">Find cuts in selected clips</button>
+		<div id="status">Transcribe the clip in the Text panel, select it (and any recording stacked with it), then click Find cuts.</div>
+
+		<h3>Review</h3>
+		<div id="cuts"></div>
+		<button id="apply" disabled>Cut</button>
+
+		<h3>Log</h3>
+		<textarea id="report" readonly></textarea>
+
+		<script src="core.js"></script>
+		<script src="main.js"></script>
+	</body>
+</html>

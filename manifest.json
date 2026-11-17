@@ -1,0 +1,23 @@
+{
+	"id": "easyrecord.premiere.panel",
+	"name": "Easy Record",
+	"version": "0.7.2",
+	"main": "index.html",
+	"manifestVersion": 5,
+	"requiredPermissions": { "localFileSystem": "fullAccess" },
+	"host": {
+		"app": "premierepro",
+		"minVersion": "25.6.0"
+	},
+	"entrypoints": [
+		{
+			"id": "easyRecord",
+			"type": "panel",
+			"label": { "default": "Easy Record" },
+			"minimumSize": { "width": 240, "height": 360 },
+			"maximumSize": { "width": 1200, "height": 1600 },
+			"preferredDockedSize": { "width": 300, "height": 520 },
+			"preferredFloatingSize": { "width": 320, "height": 560 }
+		}
+	]
+}

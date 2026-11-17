@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			/* Premiere panels do not scroll on their own */
+			html, body { height: 100%; margin: 0; }
+			body { color: #ddd; font-family: sans-serif; font-size: 12px; padding: 10px; box-sizing: border-box; overflow-y: auto; }
+			h3 { margin: 14px 0 6px; font-size: 12px; text-transform: uppercase; color: #999; }
+			.row { display: flex; align-items: center; margin: 4px 0; }
+			.row label { width: 64px; }
+			.row input[type="range"] { flex: 1; }
+			.row span { width: 34px; text-align: right; }
+			.row input[type="number"] { width: 60px; }
+			#status { margin-top: 12px; min-height: 16px; }
+			#status.error { color: #ff7b7b; }
+			button { margin-top: 6px; }
+			textarea { width: 100%; height: 160px; margin-top: 6px; font-family: monospace; font-size: 10px; }
+		</style>
+	</head>
+	<body>
+		<h3>Presets</h3>
+		<div class="row"><select id="presetList" style="flex: 1"></select><button id="deletePreset">Delete</button></div>
+		<div class="row"><input type="text" id="presetName" placeholder="Preset name" style="flex: 1" /><button id="savePreset">Save preset</button></div>
+
+		<!-- data-group = which effect a slider drives; data-key = which value inside it -->
+		<h3>Crop</h3>
+		<div class="row"><label>Top</label><input type="range" min="0" max="100" value="0" data-group="frame" data-key="top" /><span></span></div>
+		<div class="row"><label>Bottom</label><input type="range" min="0" max="100" value="0" data-group="frame" data-key="bottom" /><span></span></div>
+		<div class="row"><label>Left</label><input type="range" min="0" max="100" value="0" data-group="frame" data-key="left" /><span></span></div>
+		<div class="row"><label>Right</label><input type="range" min="0" max="100" value="0" data-group="frame" data-key="right" /><span></span></div>
+
+		<h3>Frame</h3>
+		<div class="row"><label>Corners</label><input type="range" min="0" max="100" value="0" data-group="frame" data-key="roundness" /><span></span></div>
+		<div class="row"><label>Padding %</label><input type="range" min="0" max="90" value="0" data-group="padding" data-key="padding" /><span></span></div>
+		<div class="row"><label>Base scale</label><input type="number" min="1" max="1000" value="100" data-group="padding" data-key="base" /></div>
+
+		<h3>Position</h3>
+		<div class="row"><label>X %</label><input type="range" min="0" max="100" value="50" data-group="position" data-key="x" /><span></span></div>
+		<div class="row"><label>Y %</label><input type="range" min="0" max="100" value="50" data-group="position" data-key="y" /><span></span></div>
+
+		<h3>Shadow</h3>
+		<div class="row"><label>Softness</label><input type="range" min="0" max="250" value="0" data-group="shadow" data-key="softness" /><span></span></div>
+		<div class="row"><label>Opacity</label><input type="range" min="0" max="100" value="50" data-group="shadow" data-key="opacity" /><span></span></div>
+
+		<h3>Auto zoom</h3>
+		<div class="row" id="cursorFileName">Auto: the cursor file next to each recording</div>
+		<div class="row"><button id="chooseCursorFile">Choose file</button><button id="autoCursorFile">Auto</button></div>
+		<div class="row"><label>Zoom on</label>
+			<select data-group="zoom" data-key="trigger">
+				<option value="0" selected>Clicks</option>
+				<option value="1">Cursor pauses</option>
+			</select>
+		</div>
+		<div class="row"><label>Follow</label><input type="checkbox" data-group="zoom" data-key="follow" /> cursor while zoomed</div>
+		<div class="row"><label>Blur</label><input type="number" min="0" max="360" value="180" data-group="zoom" data-key="blur" /> 0 = off</div>
+		<div class="row"><label>Zoom %</label><input type="number" min="110" max="400" value="150" data-group="zoom" data-key="zoom" /></div>
+		<div class="row"><label>Speed ms</label><input type="number" min="50" max="3000" value="400" data-group="zoom" data-key="transition" /></div>
+		<div class="row"><label>Hold s</label><input type="number" min="0" max="30" step="0.1" value="1.5" data-group="zoom" data-key="hold" /></div>
+		<div class="row"><button id="generateZoom">Generate zooms</button></div>
+		<div class="row">Replaces any Transform effect on the selected clips.</div>
+		<div class="row"><button id="removeKeyframes">Remove all keyframes</button></div>
+		<div class="row">From every effect on the selected clips. Each value stays as it was at the clip's start.</div>
+
+		<div id="status">Select clips, then move a slider.</div>
+
+		<button id="inspect">Inspect selected clip</button>
+		<textarea id="report" readonly hidden></textarea>
+
+		<script src="core.js"></script>
+		<script src="main.js"></script>
+	</body>
+</html>

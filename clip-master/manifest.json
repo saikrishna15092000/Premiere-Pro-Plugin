@@ -1,0 +1,22 @@
+{
+	"id": "clipmaster.premiere.panel",
+	"name": "Clip Master",
+	"version": "0.2.1",
+	"main": "index.html",
+	"manifestVersion": 5,
+	"host": {
+		"app": "premierepro",
+		"minVersion": "25.6.0"
+	},
+	"entrypoints": [
+		{
+			"id": "clipMaster",
+			"type": "panel",
+			"label": { "default": "Clip Master" },
+			"minimumSize": { "width": 240, "height": 360 },
+			"maximumSize": { "width": 1200, "height": 1600 },
+			"preferredDockedSize": { "width": 320, "height": 520 },
+			"preferredFloatingSize": { "width": 360, "height": 560 }
+		}
+	]
+}
